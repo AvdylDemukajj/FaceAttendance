@@ -1,4 +1,5 @@
 import tkinter as tk
+import cv2
 
 import util
 
@@ -15,6 +16,17 @@ class App:
 
         self.webcam_label = util.get_img_label(self.main_window)
         self.webcam_label.place(x=10, y=0, width=700, height=500)
+
+        self.add_webcam(self.webcam_label)
+
+    def add_webcam(self, label):
+        if 'cap' not in self.__dict__:
+            self.cap = cv2.VideoCapture(0)
+
+        self._label = label
+        self.process_webcam()
+
+
 
     def login(self):
         pass
