@@ -1,5 +1,6 @@
 import tkinter as tk
 import cv2
+from PIL import Image, ImageTk
 
 import util
 
@@ -26,7 +27,18 @@ class App:
         self._label = label
         self.process_webcam()
 
+    def process_webcam(self):
+        ret, frame = self.cap.read()
+        self.most_recent_capture_arr = frame
 
+        img_ = cv2.cvtColor(self.most_recent_capture_arr, cv2.COLOR_BGR2RGB)
+        self.most_recent_capture_pil = Image.fromarray(img_)
+
+        imgtk = ImageTk.PhotoImage(image = self.most_recent_capture_pil)
+        self._label.imgtk= imgtk
+        self._label.configure(image=imgtk)
+
+        self._label.after(20, self.process_webcam)
 
     def login(self):
         pass
