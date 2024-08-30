@@ -8,6 +8,7 @@ class App:
         self.main_window.geometry("1200x520+350+100")
 
         self.login_button_main_window = util.get_button(self.main_window, "Login", "green", self.login)
+        self.register_new_user_button_main_window = util.get_button(self.main_window, "Register new user", "gray", self.register_new_user, fg='black')
 
     def start(self):
         self.main_window.mainloop()
