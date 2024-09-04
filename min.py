@@ -44,8 +44,28 @@ class App:
         pass
 
     def register_new_user(self):
+        self.register_new_user_window = tk.Toplevel(self.main_window)
+        self.register_new_user_window.geometry("1200x520+370+120")
+
+        self.accept_button_new_register_window = util.get_button(self.register_new_user_window, "Accept", "green", self.accept_register_new_user)
+        self.accept_button_new_register_window.place(x=750, y=300)
+
+        self.try_again_button_new_register_window = util.get_button(self.register_new_user_window, "Try Again", "red", self.accept_register_new_user)
+        self.try_again_button_new_register_window.place(x=750, y=400)
+
+        self.webcam_label = util.get_img_label(self.register_new_user_window)
+        self.webcam_label.place(x=10, y=0, width=700, height=500)
+
+        self.add_img_label(self.capture_label)
+
+
+    def add_img_label(self, label):
         pass
 
+
+
+    def accept_register_new_user():
+        pass
 
     def start(self):
         self.main_window.mainloop()
