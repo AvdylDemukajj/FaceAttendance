@@ -1,9 +1,15 @@
+import os.path
+import datetime
+import pickle
+
 import tkinter as tk
 import cv2
 from PIL import Image, ImageTk
-import os
+import face_recognition
 
 import util
+
+
 
 class App:
     def __init__(self):
@@ -24,6 +30,8 @@ class App:
         self.db_dir = './db'
         if not os.path.exists(self.db_dir):
             os.mkdir(self.db_dir)
+        
+        self.log_path = './log.txt'
 
     def add_webcam(self, label):
         if 'cap' not in self.__dict__:
@@ -46,7 +54,15 @@ class App:
         self._label.after(20, self.process_webcam)
 
     def login(self):
-        pass
+        name = util.recognize(self.most_recent_capture_arr, self.db_dir)
+
+        if name in ['unknown_person', 'no_persons_found']:
+            util.msg_box('Ups...', 'Unknown user. Please register new user or try again.')
+        else:
+            util.msg_box('Hasta la vista !', 'Goodbye, {}.'.format(name))
+            with open(self.log_path, 'a') as f:
+                f.write('{},{},out\n'.format(name, datetime.datetime.now()))
+                f.close()
 
     def register_new_user(self):
         self.register_new_user_window = tk.Toplevel(self.main_window)
