@@ -109,26 +109,23 @@ class App:
         self.register_new_user_capture = self.most_recent_capture_arr.copy()
 
 
-
     def accept_register_new_user(self):
         name = self.entry_text_register_new_user.get(1.0, "end-1c")
 
-        cv2.imwrite(os.path.join(self.db_dir, '{}.jpg'.format(name)), self.register_new_user_capture)
+        embeddings = face_recognition.face_encodings(self.register_new_user_capture)[0]
 
-        util.msg_box('Success','User was registered successfully!')
+        file = open(os.path.join(self.db_dir, '{}.pickle'.format(name)), 'wb')
+        pickle.dump(embeddings, file)
+
+        util.msg_box('Success!', 'User was registered successfully !')
 
         self.register_new_user_window.destroy()
 
-    def start(self):
-        self.main_window.mainloop()
-
-    
     def try_again_register_new_user(self):
         self.register_new_user_window.destroy()
 
     def start(self):
         self.main_window.mainloop()
-
 
 if __name__ == '__main__':
     app = App()
