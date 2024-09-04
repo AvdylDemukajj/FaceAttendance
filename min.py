@@ -119,6 +119,10 @@ class App:
 
         self.register_new_user_window.destroy()
 
+    def start(self):
+        self.main_window.mainloop()
+
+    
     def try_again_register_new_user(self):
         self.register_new_user_window.destroy()
 
