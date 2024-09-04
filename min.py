@@ -58,6 +58,9 @@ class App:
 
         self.add_img_label(self.capture_label)
 
+        self.entry_text_register_new_user = util.get_entry_text(self.register_new_user_window)
+        self.entry_text_register_new_user.place(x=750, y=150)
+
 
     def add_img_label(self, label):
         imgtk = ImageTk.PhotoImage(image = self.most_recent_capture_pil)
