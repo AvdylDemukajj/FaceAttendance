@@ -50,7 +50,7 @@ class App:
         self.accept_button_new_register_window = util.get_button(self.register_new_user_window, "Accept", "green", self.accept_register_new_user)
         self.accept_button_new_register_window.place(x=750, y=300)
 
-        self.try_again_button_new_register_window = util.get_button(self.register_new_user_window, "Try Again", "red", self.accept_register_new_user)
+        self.try_again_button_new_register_window = util.get_button(self.register_new_user_window, "Try Again", "red", self.try_again_register_new_user)
         self.try_again_button_new_register_window.place(x=750, y=400)
 
         self.webcam_label = util.get_img_label(self.register_new_user_window)
@@ -60,11 +60,18 @@ class App:
 
 
     def add_img_label(self, label):
-        pass
+        imgtk = ImageTk.PhotoImage(image = self.most_recent_capture_pil)
+        label.imgtk= imgtk
+        label.configure(image=imgtk)
+
+        self.register_new_user_capture = self.most_recent_capture_arr.copy()
 
 
 
     def accept_register_new_user():
+        pass
+
+    def try_again_register_new_user(self):
         pass
 
     def start(self):
